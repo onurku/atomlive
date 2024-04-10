@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "engines": {
-    "node": "18.17.0"
+    "node": "18.18.2"
   },
   "scripts": {
     "dev": "set NODE_OPTIONS=--openssl-legacy-provider && set DB_HOST=127.0.0.1 && next dev",
