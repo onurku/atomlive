@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -e
+
+# will load .env only and will not overwrite already set vars
+env_vars=$(node -e "require('dotenv').config(); Object.entries(process.env).forEach(([k,v]) => console.log(\`export \${k}=\"\${v}\"\`));")
+eval "$env_vars"
+
+# will fail if instance is already started
+echo "starting ephemeral postgres instance"
+docker run -p 127.0.0.1:$DB_PORT:$DB_PORT --name "atom-frontend-$DB_NAME" -e POSTGRES_PASSWORD=$DB_PASSWORD -e POSTGRES_USER=$DB_USERNAME -e POSTGRES_DB=$DB_NAME -d postgres:14
+
+tmpdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'tmpdir')
+db_location="$tmpdir/prod_dump.sql"
+
+echo "copying production DB"
+PGPASSWORD="$DB_PASSWORD" pg_dump -h "$DB_HOST" -U "$DB_USERNAME" -C "$DB_NAME" > "$db_location"
+echo "loading production DB into ephemeral postgres instance"
+PGPASSWORD="$DB_PASSWORD" psql -q -h 127.0.0.1 -d $DB_NAME -U $DB_NAME -f "$db_location" > /dev/null
+rm -rf "$db_location"

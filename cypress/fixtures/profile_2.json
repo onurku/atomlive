@@ -1,0 +1,39 @@
+{
+    "uuid": "146d0305-9f4c-4cdc-8af5-81f45dd88d89",
+    "email": "abhishekr700+test@gmail.com",
+    "is_email_verified": false,
+    "first_name": "SomeCustomValue",
+    "last_name": "SomeCustomValue",
+    "title": "MisterLol",
+    "phone": null,
+    "phone_verified": null,
+    "about": "SomeCustomValue",
+    "country": "SomeCustomValue",
+    "timezone": "SomeCustomValue",
+    "photo_url": null,
+    "organization_id": 1,
+    "metadata_timezone": null,
+    "is_active": true,
+    "languages_and_regions": [
+        {
+            "language_code": "in",
+            "language": "Hindi",
+            "regional": "Hindi",
+            "language_name_regional": "Hindi"
+        },
+        {
+            "language_code": "jp",
+            "language": "Japanese",
+            "regional": "Japanese",
+            "language_name_regional": "日本"
+        },
+        {
+            "language_code": "is",
+            "language": "Icelandic",
+            "regional": "Icelandic",
+            "language_name_regional": "Íslenskur"
+        }
+    ],
+    "roles": [],
+    "children": []
+}

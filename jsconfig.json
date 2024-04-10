@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/utils/*": ["utils/*"],
+      "@/assets/*": ["assets/*"],
+      "@/templates/*": ["templates/*"],
+      "@/lib/*": ["lib/*"],
+      "@/pages/*": ["pages/*"],
+      "@/ar_content/*": ["ar_content/*"],
+      "@/public/*": ["public/*"],
+      "@/email-templates/*": ["pages/api/email/email-templates/*"],
+      "@/helpers/*": ["helpers/*"]
+    }
+  }
+}

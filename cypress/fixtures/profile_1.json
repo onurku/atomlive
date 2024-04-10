@@ -1,0 +1,20 @@
+{
+    "uuid": "146d0305-9f4c-4cdc-8af5-81f45dd88d89",
+    "email": "abhishekr700+test@gmail.com",
+    "is_email_verified": false,
+    "first_name": "Test",
+    "last_name": "User",
+    "title": null,
+    "phone": null,
+    "phone_verified": null,
+    "about": null,
+    "country": null,
+    "timezone": null,
+    "photo_url": null,
+    "organization_id": null,
+    "metadata_timezone": null,
+    "is_active": true,
+    "languages_and_regions": [],
+    "roles": [],
+    "children": []
+}

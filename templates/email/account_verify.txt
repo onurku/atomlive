@@ -1,0 +1,14 @@
+Confirm your account!
+
+
+Thanks for signing up! We're here to help your child develop a lifelong love of books.
+
+
+Your verification code is: {{email_verification_link}}
+
+
+Please copy the link to your browser to confirm your email address
+
+
+Thanks,
+Atom
