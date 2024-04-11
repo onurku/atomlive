@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 //library components
 import Avatar from "@mui/material/Avatar";

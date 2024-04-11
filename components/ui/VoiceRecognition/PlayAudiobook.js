@@ -205,136 +205,132 @@ const PlayAudiobook = ({
     setAudio(new Audio(`${audioLocation}${lang[language]}/${page}.mp3`));
   }, [transcript]);
 
-  return (
-    <>
-      {browserSupportsSpeechRecognition &&
-        ((language && language === "en") ||
-          language?.includes("es") ||
-          language === "fr") && (
-          <div className={classes.voiceRoot}>
-            <audio
-              ref={audioRef}
-              src={audioUrl}
-              preload="auto"
-              onEnded={handleAudioEnded}
-              onLoadedMetadata={handleAudioLoaded}
-            />
-            <Stack
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                flexDirection: voiceMode === 2 ? "row-reverse" : "row"
-              }}
-              direction={{ xs: "column", lg: "row" }}
-              spacing={2}
-            >
-              {voiceMode === 0 && (
-                <>
+  return <>
+    {browserSupportsSpeechRecognition &&
+      ((language && language === "en") ||
+        language?.includes("es") ||
+        language === "fr") && (
+        <div className={classes.voiceRoot}>
+          <audio
+            ref={audioRef}
+            src={audioUrl}
+            preload="auto"
+            onEnded={handleAudioEnded}
+            onLoadedMetadata={handleAudioLoaded}
+          />
+          <Stack
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: voiceMode === 2 ? "row-reverse" : "row"
+            }}
+            direction={{ xs: "column", lg: "row" }}
+            spacing={2}
+          >
+            {voiceMode === 0 && (
+              <>
+                <Button
+                  onClick={playAudio}
+                  size="small"
+                  variant="outlined"
+                  color="secondary"
+                >
+                  Play Audiobook
+                </Button>
+              </>
+            )}
+            {voiceMode === 2 && (
+              <>
+                <Stack>
                   <Button
+                    sx={{ display: "flex", alignSelf: "flex-end", mb: 2 }}
                     onClick={playAudio}
                     size="small"
                     variant="outlined"
                     color="secondary"
                   >
-                    Play Audiobook
+                    Stop Reading
                   </Button>
-                </>
-              )}
-              {voiceMode === 2 && (
-                <>
-                  <Stack>
-                    <Button
-                      sx={{ display: "flex", alignSelf: "flex-end", mb: 2 }}
-                      onClick={playAudio}
-                      size="small"
-                      variant="outlined"
-                      color="secondary"
-                    >
-                      Stop Reading
-                    </Button>
-                    <Stack
-                      sx={{
-                        height: contentTextHeight,
-                        overflowY: "scroll"
-                      }}
-                    >
-                      {pageText?.split("<br/>").map((paragraph, index) => {
-                        return (
-                          <>
-                            <Typography
-                              variant="body1"
-                              key={index}
-                              gutterBottom
-                              sx={{ fontSize: `${contentTextFontSize}rem` }}
-                            >
-                              {paragraph
-                                .split(" - ")
-                                .join(" ")
-                                .split(" ")
-                                .map((word, ind) => {
-                                  const newWord = word
-                                    ?.replace(/[:;,.|¿?¡!“”]+/g, "")
-                                    ?.toLowerCase();
-                                  newWord.split(" – ").join(" ");
-                                  const newAudioText = activeAudioText
-                                    ?.replace(/[:;,.|¿?¡!“”]+/g, "")
-                                    ?.toLowerCase();
-                                  currentIndex++;
+                  <Stack
+                    sx={{
+                      height: contentTextHeight,
+                      overflowY: "scroll"
+                    }}
+                  >
+                    {pageText?.split("<br/>").map((paragraph, index) => {
+                      return <>
+                        <Typography
+                          variant="body1"
+                          key={index}
+                          gutterBottom
+                          sx={{ fontSize: `${contentTextFontSize}rem` }}
+                        >
+                          {paragraph
+                            .split(" - ")
+                            .join(" ")
+                            .split(" ")
+                            .map((word, ind) => {
+                              const newWord = word
+                                ?.replace(/[:;,.|¿?¡!“”]+/g, "")
+                                ?.toLowerCase();
+                              newWord.split(" – ").join(" ");
+                              const newAudioText = activeAudioText
+                                ?.replace(/[:;,.|¿?¡!“”]+/g, "")
+                                ?.toLowerCase();
+                              currentIndex++;
 
-                                  if (newAudioText === newWord) {
-                                    console.log(
-                                      "audio Text",
-                                      currentIndex,
-                                      activeAudioIndex,
-                                      newWord,
-                                      newAudioText
-                                    );
-                                  }
+                              if (newAudioText === newWord) {
+                                console.log(
+                                  "audio Text",
+                                  currentIndex,
+                                  activeAudioIndex,
+                                  newWord,
+                                  newAudioText
+                                );
+                              }
 
-                                  return (
-                                    <Fragment key={ind}>
-                                      {/* {currentIndex === activeAudioIndex && (
-                                    <Typography variant="body1">
-                                      {currentIndex}
-                                      {", "} {activeAudioIndex}
+                              return (
+                                <Fragment key={ind}>
+                                  {/* {currentIndex === activeAudioIndex && (
+                                <Typography variant="body1">
+                                  {currentIndex}
+                                  {", "} {activeAudioIndex}
+                                </Typography>
+                              )} */}
+
+                                  {newAudioText === newWord &&
+                                  currentIndex === activeAudioIndex + 1 ? (
+                                    <Typography
+                                      variant="span"
+                                      sx={{
+                                        border: "1px solid black",
+                                        color: blue["A700"],
+                                        backgroundColor: common.white,
+                                        fontWeight: "bold",
+                                        fontSize: `${contentTextFontSize}rem`
+                                      }}
+                                    >
+                                      {word}{" "}
                                     </Typography>
-                                  )} */}
-
-                                      {newAudioText === newWord &&
-                                      currentIndex === activeAudioIndex + 1 ? (
-                                        <Typography
-                                          variant="span"
-                                          sx={{
-                                            border: "1px solid black",
-                                            color: blue["A700"],
-                                            backgroundColor: common.white,
-                                            fontWeight: "bold",
-                                            fontSize: `${contentTextFontSize}rem`
-                                          }}
-                                        >
-                                          {word}{" "}
-                                        </Typography>
-                                      ) : (
-                                        <Typography variant="span">
-                                          {word}{" "}
-                                        </Typography>
-                                      )}
-                                    </Fragment>
-                                  );
-                                })}
-                            </Typography>
-                          </>
-                        );
-                      })}
-                    </Stack>
+                                  ) : (
+                                    <Typography variant="span">
+                                      {word}{" "}
+                                    </Typography>
+                                  )}
+                                </Fragment>
+                              );
+                            })}
+                        </Typography>
+                      </>;
+                    })}
                   </Stack>
-                </>
-              )}
-            </Stack>
-          </div>
-        )}
-    </>
-  );
+                </Stack>
+              </>
+            )}
+          </Stack>
+        </div>
+      )}
+  </>;
 };
 
 export default PlayAudiobook;

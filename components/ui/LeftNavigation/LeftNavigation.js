@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import { common, grey } from "@mui/material/colors";
 import Divider from "@mui/material/Divider";
 import { FiBookOpen, FiGrid, FiUser } from "react-icons/fi";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "@mui/material/Link";
 import List from "@mui/material/List";
 import {

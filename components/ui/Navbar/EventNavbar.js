@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NextLink from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import { createStyles, makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";

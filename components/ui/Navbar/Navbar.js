@@ -16,7 +16,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import { FiX } from "react-icons/fi";
 import HelpIcon from "@mui/icons-material/Help";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import Menu from "@mui/material/Menu";

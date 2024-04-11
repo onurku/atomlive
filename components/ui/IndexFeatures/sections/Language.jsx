@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 import { makeStyles } from "@mui/styles";

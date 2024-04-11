@@ -2610,11 +2610,9 @@
     return va().name === da.CHROME;
   }
   function Dh() {
-    return (
-      window.navigator.appVersion &&
-      null !== window.navigator.appVersion.match(/Chrome\/([\w\W]*?)\./) &&
-      35 >= window.navigator.appVersion.match(/Chrome\/([\w\W]*?)\./)[1]
-    );
+    return window.navigator.appVersion &&
+    null !== window.navigator.appVersion.match(/Chrome\/([\w\W]*?)\./) &&
+    35 >= window.navigator.appVersion.match(/Chrome\/([\w\W]*?)\./)[1];
   }
   function Te() {
     let c = va();
@@ -5024,29 +5022,27 @@
     a = M((e = a.split(/(\r\n|\r|\n)/))).call(e, f);
     let g = null,
       h = new Y();
-    return (
-      r(c).call(c, (a) => {
-        let b = a.match(/m=(audio|video)/);
-        if (b && b[1]) return void (g = b[1]);
-        g &&
-          (a = a.match(/=(sendrecv|recvonly|sendonly|inactive)/)) &&
-          a[1] &&
-          h.set(g, a[1]);
-      }),
-      (g = null),
-      D(a)
-        .call(a, (a) => {
-          var b = a.match(/m=(audio|video)/);
-          if (b && b[1]) return (g = b[1]), a;
-          if (!g) return a;
-          if ((b = a.match(/=(sendrecv|recvonly|sendonly|inactive)/)) && b[1]) {
-            let c = h.get(g);
-            if (c && c !== b[1]) return a.replace(b[1], c);
-          }
-          return a;
-        })
-        .join("\r\n") + "\r\n"
-    );
+    return r(c).call(c, (a) => {
+      let b = a.match(/m=(audio|video)/);
+      if (b && b[1]) return void (g = b[1]);
+      g &&
+        (a = a.match(/=(sendrecv|recvonly|sendonly|inactive)/)) &&
+        a[1] &&
+        h.set(g, a[1]);
+    }),
+    (g = null),
+    D(a)
+      .call(a, (a) => {
+        var b = a.match(/m=(audio|video)/);
+        if (b && b[1]) return (g = b[1]), a;
+        if (!g) return a;
+        if ((b = a.match(/=(sendrecv|recvonly|sendonly|inactive)/)) && b[1]) {
+          let c = h.get(g);
+          if (c && c !== b[1]) return a.replace(b[1], c);
+        }
+        return a;
+      })
+      .join("\r\n") + "\r\n";
   }
   function lm(c, a) {
     let b = document.createElement("video"),
@@ -10099,21 +10095,19 @@
     Fo = I.isStandardBrowserEnv()
       ? (function () {
           function c(a) {
-            return (
-              b && (d.setAttribute("href", a), (a = d.href)),
-              d.setAttribute("href", a),
-              {
-                href: d.href,
-                protocol: d.protocol ? d.protocol.replace(/:$/, "") : "",
-                host: d.host,
-                search: d.search ? d.search.replace(/^\?/, "") : "",
-                hash: d.hash ? d.hash.replace(/^#/, "") : "",
-                hostname: d.hostname,
-                port: d.port,
-                pathname:
-                  "/" === d.pathname.charAt(0) ? d.pathname : "/" + d.pathname
-              }
-            );
+            return b && (d.setAttribute("href", a), (a = d.href)),
+            d.setAttribute("href", a),
+            {
+              href: d.href,
+              protocol: d.protocol ? d.protocol.replace(/:$/, "") : "",
+              host: d.host,
+              search: d.search ? d.search.replace(/^\?/, "") : "",
+              hash: d.hash ? d.hash.replace(/^#/, "") : "",
+              hostname: d.hostname,
+              port: d.port,
+              pathname:
+                "/" === d.pathname.charAt(0) ? d.pathname : "/" + d.pathname
+            };
           }
           var a,
             b = /(msie|trident)/i.test(navigator.userAgent),
@@ -10333,41 +10327,39 @@
     },
     Ko = function (c) {
       c.cancelToken && c.cancelToken.throwIfRequested();
-      return (
-        c.baseURL &&
-          !/^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(c.url) &&
-          (c.url = Jo(c.baseURL, c.url)),
-        (c.headers = c.headers || {}),
-        (c.data = $f(c.data, c.headers, c.transformRequest)),
-        (c.headers = I.merge(
-          c.headers.common || {},
-          c.headers[c.method] || {},
-          c.headers || {}
-        )),
-        I.forEach(
-          "delete get head post put patch common".split(" "),
-          function (a) {
-            delete c.headers[a];
-          }
-        ),
-        (c.adapter || pe.adapter)(c).then(
-          function (a) {
-            c.cancelToken && c.cancelToken.throwIfRequested();
-            return (a.data = $f(a.data, a.headers, c.transformResponse)), a;
-          },
-          function (a) {
-            hk(a) ||
-              (c.cancelToken && c.cancelToken.throwIfRequested(),
-              a &&
-                a.response &&
-                (a.response.data = $f(
-                  a.response.data,
-                  a.response.headers,
-                  c.transformResponse
-                )));
-            return Promise.reject(a);
-          }
-        )
+      return c.baseURL &&
+        !/^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(c.url) &&
+        (c.url = Jo(c.baseURL, c.url)),
+      (c.headers = c.headers || {}),
+      (c.data = $f(c.data, c.headers, c.transformRequest)),
+      (c.headers = I.merge(
+        c.headers.common || {},
+        c.headers[c.method] || {},
+        c.headers || {}
+      )),
+      I.forEach(
+        "delete get head post put patch common".split(" "),
+        function (a) {
+          delete c.headers[a];
+        }
+      ),
+      (c.adapter || pe.adapter)(c).then(
+        function (a) {
+          c.cancelToken && c.cancelToken.throwIfRequested();
+          return (a.data = $f(a.data, a.headers, c.transformResponse)), a;
+        },
+        function (a) {
+          hk(a) ||
+            (c.cancelToken && c.cancelToken.throwIfRequested(),
+            a &&
+              a.response &&
+              (a.response.data = $f(
+                a.response.data,
+                a.response.headers,
+                c.transformResponse
+              )));
+          return Promise.reject(a);
+        }
       );
     },
     ag = function (c, a) {
@@ -10418,10 +10410,8 @@
     return c;
   };
   Uc.prototype.getUri = function (c) {
-    return (
-      (c = ag(this.defaults, c)),
-      gk(c.url, c.params, c.paramsSerializer).replace(/^\?/, "")
-    );
+    return (c = ag(this.defaults, c)),
+    gk(c.url, c.params, c.paramsSerializer).replace(/^\?/, "");
   };
   I.forEach(["delete", "get", "head", "options"], function (c) {
     Uc.prototype[c] = function (a, b) {
@@ -17983,384 +17973,382 @@
           b
         );
       }
-      return (
-        df(b, a),
-        (b.prototype.updateStats = function () {
-          return ef(this, void 0, void 0, function () {
-            var a,
-              b = this;
-            return ff(this, function (d) {
-              switch (d.label) {
-                case 0:
-                  return (a = this), [4, this.pc.getStats()];
-                case 1:
-                  return (
-                    (a.report = d.sent()),
-                    (this._stats = cb(xd)),
-                    this.report.forEach(function (a) {
-                      switch (a.type) {
-                        case ac.OUTBOUND:
-                          "audio" === a.mediaType
-                            ? b.processAudioOutboundStats(a)
-                            : "video" === a.mediaType &&
-                              b.processVideoOutboundStats(a);
-                          break;
-                        case ac.INBOUND:
-                          "audio" === a.mediaType
-                            ? b.processAudioInboundStats(a)
-                            : "video" === a.mediaType &&
-                              b.processVideoInboundStats(a);
-                          break;
-                        case ac.TRANSPORT:
-                          (a = b.report.get(a.selectedCandidatePairId)) &&
-                            b.processCandidatePairStats(a);
-                          break;
-                        case ac.CANDIDATE_PAIR:
-                          a.selected && b.processCandidatePairStats(a);
-                      }
-                    }),
-                    this.updateSendBitrate(),
-                    (this._stats.timestamp = Date.now()),
-                    this.calcLossRate(this._stats),
-                    (this.stats = this._stats),
-                    [2]
-                  );
-              }
+      return df(b, a),
+      (b.prototype.updateStats = function () {
+        return ef(this, void 0, void 0, function () {
+          var a,
+            b = this;
+          return ff(this, function (d) {
+            switch (d.label) {
+              case 0:
+                return (a = this), [4, this.pc.getStats()];
+              case 1:
+                return (
+                  (a.report = d.sent()),
+                  (this._stats = cb(xd)),
+                  this.report.forEach(function (a) {
+                    switch (a.type) {
+                      case ac.OUTBOUND:
+                        "audio" === a.mediaType
+                          ? b.processAudioOutboundStats(a)
+                          : "video" === a.mediaType &&
+                            b.processVideoOutboundStats(a);
+                        break;
+                      case ac.INBOUND:
+                        "audio" === a.mediaType
+                          ? b.processAudioInboundStats(a)
+                          : "video" === a.mediaType &&
+                            b.processVideoInboundStats(a);
+                        break;
+                      case ac.TRANSPORT:
+                        (a = b.report.get(a.selectedCandidatePairId)) &&
+                          b.processCandidatePairStats(a);
+                        break;
+                      case ac.CANDIDATE_PAIR:
+                        a.selected && b.processCandidatePairStats(a);
+                    }
+                  }),
+                  this.updateSendBitrate(),
+                  (this._stats.timestamp = Date.now()),
+                  this.calcLossRate(this._stats),
+                  (this.stats = this._stats),
+                  [2]
+                );
+            }
+          });
+        });
+      }),
+      (b.prototype.processCandidatePairStats = function (a) {
+        this._stats.sendBandwidth = a.availableOutgoingBitrate || 0;
+        a.currentRoundTripTime &&
+          (this._stats.rtt = 1e3 * a.currentRoundTripTime);
+        this._stats.videoSend.forEach(function (b) {
+          !b.rttMs &&
+            a.currentRoundTripTime &&
+            (b.rttMs = 1e3 * a.currentRoundTripTime);
+        });
+        this._stats.audioSend.forEach(function (b) {
+          !b.rttMs &&
+            a.currentRoundTripTime &&
+            (b.rttMs = 1e3 * a.currentRoundTripTime);
+        });
+      }),
+      (b.prototype.processAudioInboundStats = function (a) {
+        var b = this._stats.audioRecv.find(function (b) {
+          return b.ssrc === a.ssrc;
+        });
+        b || ((b = cb(Tk)), this._stats.audioRecv.push(b));
+        b.ssrc = a.ssrc;
+        b.packets = a.packetsReceived;
+        b.packetsLost = a.packetsLost;
+        b.bytes = a.bytesReceived;
+        b.jitterMs = 1e3 * a.jitter;
+        a.trackId && this.processAudioTrackReceiverStats(a.trackId, b);
+        a.codecId && (b.codec = this.getCodecFromCodecStats(a.codecId));
+        b.receivedFrames || (b.receivedFrames = a.packetsReceived);
+        b.droppedFrames || (b.droppedFrames = a.packetsLost);
+        0 < b.receivedFrames &&
+          !this.isFirstAudioReceived &&
+          (this.onFirstAudioReceived && this.onFirstAudioReceived(),
+          (this.isFirstAudioReceived = !0));
+        b.outputLevel &&
+          0 < b.outputLevel &&
+          !this.isFirstAudioDecoded &&
+          (this.onFirstAudioDecoded && this.onFirstAudioDecoded(),
+          (this.isFirstAudioDecoded = !0));
+      }),
+      (b.prototype.processVideoInboundStats = function (a) {
+        var b = this._stats.videoRecv.find(function (b) {
+          return b.ssrc === a.ssrc;
+        });
+        b || ((b = cb(Qk)), this._stats.videoRecv.push(b));
+        b.ssrc = a.ssrc;
+        b.packets = a.packetsReceived;
+        b.packetsLost = a.packetsLost;
+        b.bytes = a.bytesReceived;
+        b.firsCount = a.firCount;
+        b.nacksCount = a.nackCount;
+        b.plisCount = a.pliCount;
+        b.framesDecodeCount = a.framesDecoded;
+        var d = this.lastDecodeVideoReceiverStats.get(b.ssrc),
+          g = this.lastVideoFramesDecode.get(b.ssrc),
+          h = Date.now();
+        if (d) {
+          var k = d.stats,
+            l = h - d.lts;
+          b.framesDecodeFreezeTime = k.framesDecodeFreezeTime;
+          b.framesDecodeInterval = k.framesDecodeInterval;
+          b.framesDecodeCount > k.framesDecodeCount
+            ? ((d.lts = Date.now()),
+              (b.framesDecodeInterval = l),
+              500 <= b.framesDecodeInterval &&
+                (b.framesDecodeFreezeTime += b.framesDecodeInterval))
+            : b.framesDecodeCount < k.framesDecodeCount &&
+              (b.framesDecodeInterval = 0);
+        }
+        if (
+          (g && 800 <= h - g.lts
+            ? ((b.decodeFrameRate = Math.round(
+                (b.framesDecodeCount - g.count) / ((h - g.lts) / 1e3)
+              )),
+              this.lastVideoFramesDecode.set(b.ssrc, {
+                count: b.framesDecodeCount,
+                lts: h,
+                rate: b.decodeFrameRate
+              }))
+            : g
+            ? (b.decodeFrameRate = g.rate)
+            : this.lastVideoFramesDecode.set(b.ssrc, {
+                count: b.framesDecodeCount,
+                lts: h,
+                rate: 0
+              }),
+          a.totalDecodeTime && (b.decodeMs = 1e3 * a.totalDecodeTime),
+          a.trackId && this.processVideoTrackReceiverStats(a.trackId, b),
+          a.codecId && (b.codec = this.getCodecFromCodecStats(a.codecId)),
+          a.framerateMean && (b.framesRateFirefox = a.framerateMean),
+          0 < b.packets &&
+            !this.isFirstVideoReceived &&
+            (this.onFirstVideoReceived && this.onFirstVideoReceived(),
+            (this.isFirstVideoReceived = !0)),
+          0 < b.framesDecodeCount && !this.isFirstVideoDecoded)
+        )
+          (g = b.decodedFrame ? b.decodedFrame.width : 0),
+            (h = b.decodedFrame ? b.decodedFrame.height : 0),
+            this.onFirstVideoDecoded && this.onFirstVideoDecoded(g, h),
+            (this.isFirstVideoDecoded = !0);
+        this.lastDecodeVideoReceiverStats.set(b.ssrc, {
+          stats: ug({}, b),
+          lts: d ? d.lts : Date.now()
+        });
+      }),
+      (b.prototype.processVideoOutboundStats = function (a) {
+        var b = this._stats.videoSend.find(function (b) {
+          return b.ssrc === a.ssrc;
+        });
+        b || ((b = cb(Rk)), this._stats.videoSend.push(b));
+        var d = this.mediaBytesSent.get(a.ssrc);
+        d
+          ? d.add(a.bytesSent)
+          : ((g = new tg(10)).add(a.bytesSent),
+            this.mediaBytesSent.set(a.ssrc, g));
+        void 0 !== a.retransmittedBytesSent &&
+          ((d = this.mediaBytesRetransmit.get(a.ssrc))
+            ? d.add(a.retransmittedBytesSent)
+            : ((g = new tg(10)).add(a.retransmittedBytesSent),
+              this.mediaBytesRetransmit.set(a.ssrc, g)));
+        if (a.totalEncodedBytesTarget) {
+          var g;
+          (d = this.mediaBytesTargetEncode.get(a.ssrc))
+            ? d.add(a.totalEncodedBytesTarget)
+            : ((g = new tg(10)).add(a.totalEncodedBytesTarget),
+              this.mediaBytesTargetEncode.set(a.ssrc, g));
+        }
+        if (
+          ((b.ssrc = a.ssrc),
+          (b.bytes = a.bytesSent),
+          (b.packets = a.packetsSent),
+          (b.firsCount = a.firCount),
+          (b.nacksCount = a.nackCount),
+          (b.plisCount = a.pliCount),
+          (b.frameCount = a.framesEncoded),
+          (b.adaptionChangeReason = a.qualityLimitationReason),
+          a.totalEncodeTime && a.framesEncoded)
+        )
+          (d = this.lastEncoderMs.get(a.ssrc)),
+            (b.avgEncodeMs =
+              !d || d.lastFrameCount > a.framesEncoded
+                ? (1e3 * a.totalEncodeTime) / a.framesEncoded
+                : (1e3 * (a.totalEncodeTime - d.lastEncoderTime)) /
+                  (a.framesEncoded - d.lastFrameCount)),
+            this.lastEncoderMs.set(a.ssrc, {
+              lastFrameCount: a.framesEncoded,
+              lastEncoderTime: a.totalEncodeTime,
+              lts: Date.now()
             });
-          });
-        }),
-        (b.prototype.processCandidatePairStats = function (a) {
-          this._stats.sendBandwidth = a.availableOutgoingBitrate || 0;
-          a.currentRoundTripTime &&
-            (this._stats.rtt = 1e3 * a.currentRoundTripTime);
-          this._stats.videoSend.forEach(function (b) {
-            !b.rttMs &&
-              a.currentRoundTripTime &&
-              (b.rttMs = 1e3 * a.currentRoundTripTime);
-          });
-          this._stats.audioSend.forEach(function (b) {
-            !b.rttMs &&
-              a.currentRoundTripTime &&
-              (b.rttMs = 1e3 * a.currentRoundTripTime);
-          });
-        }),
-        (b.prototype.processAudioInboundStats = function (a) {
-          var b = this._stats.audioRecv.find(function (b) {
-            return b.ssrc === a.ssrc;
-          });
-          b || ((b = cb(Tk)), this._stats.audioRecv.push(b));
-          b.ssrc = a.ssrc;
-          b.packets = a.packetsReceived;
-          b.packetsLost = a.packetsLost;
-          b.bytes = a.bytesReceived;
-          b.jitterMs = 1e3 * a.jitter;
-          a.trackId && this.processAudioTrackReceiverStats(a.trackId, b);
-          a.codecId && (b.codec = this.getCodecFromCodecStats(a.codecId));
-          b.receivedFrames || (b.receivedFrames = a.packetsReceived);
-          b.droppedFrames || (b.droppedFrames = a.packetsLost);
-          0 < b.receivedFrames &&
-            !this.isFirstAudioReceived &&
-            (this.onFirstAudioReceived && this.onFirstAudioReceived(),
-            (this.isFirstAudioReceived = !0));
-          b.outputLevel &&
-            0 < b.outputLevel &&
-            !this.isFirstAudioDecoded &&
-            (this.onFirstAudioDecoded && this.onFirstAudioDecoded(),
-            (this.isFirstAudioDecoded = !0));
-        }),
-        (b.prototype.processVideoInboundStats = function (a) {
-          var b = this._stats.videoRecv.find(function (b) {
-            return b.ssrc === a.ssrc;
-          });
-          b || ((b = cb(Qk)), this._stats.videoRecv.push(b));
-          b.ssrc = a.ssrc;
-          b.packets = a.packetsReceived;
-          b.packetsLost = a.packetsLost;
-          b.bytes = a.bytesReceived;
-          b.firsCount = a.firCount;
-          b.nacksCount = a.nackCount;
-          b.plisCount = a.pliCount;
-          b.framesDecodeCount = a.framesDecoded;
-          var d = this.lastDecodeVideoReceiverStats.get(b.ssrc),
-            g = this.lastVideoFramesDecode.get(b.ssrc),
-            h = Date.now();
-          if (d) {
-            var k = d.stats,
-              l = h - d.lts;
-            b.framesDecodeFreezeTime = k.framesDecodeFreezeTime;
-            b.framesDecodeInterval = k.framesDecodeInterval;
-            b.framesDecodeCount > k.framesDecodeCount
-              ? ((d.lts = Date.now()),
-                (b.framesDecodeInterval = l),
-                500 <= b.framesDecodeInterval &&
-                  (b.framesDecodeFreezeTime += b.framesDecodeInterval))
-              : b.framesDecodeCount < k.framesDecodeCount &&
-                (b.framesDecodeInterval = 0);
-          }
-          if (
-            (g && 800 <= h - g.lts
-              ? ((b.decodeFrameRate = Math.round(
-                  (b.framesDecodeCount - g.count) / ((h - g.lts) / 1e3)
-                )),
-                this.lastVideoFramesDecode.set(b.ssrc, {
-                  count: b.framesDecodeCount,
-                  lts: h,
-                  rate: b.decodeFrameRate
-                }))
-              : g
-              ? (b.decodeFrameRate = g.rate)
-              : this.lastVideoFramesDecode.set(b.ssrc, {
-                  count: b.framesDecodeCount,
-                  lts: h,
-                  rate: 0
-                }),
-            a.totalDecodeTime && (b.decodeMs = 1e3 * a.totalDecodeTime),
-            a.trackId && this.processVideoTrackReceiverStats(a.trackId, b),
-            a.codecId && (b.codec = this.getCodecFromCodecStats(a.codecId)),
-            a.framerateMean && (b.framesRateFirefox = a.framerateMean),
-            0 < b.packets &&
-              !this.isFirstVideoReceived &&
-              (this.onFirstVideoReceived && this.onFirstVideoReceived(),
-              (this.isFirstVideoReceived = !0)),
-            0 < b.framesDecodeCount && !this.isFirstVideoDecoded)
-          )
-            (g = b.decodedFrame ? b.decodedFrame.width : 0),
-              (h = b.decodedFrame ? b.decodedFrame.height : 0),
-              this.onFirstVideoDecoded && this.onFirstVideoDecoded(g, h),
-              (this.isFirstVideoDecoded = !0);
-          this.lastDecodeVideoReceiverStats.set(b.ssrc, {
-            stats: ug({}, b),
-            lts: d ? d.lts : Date.now()
-          });
-        }),
-        (b.prototype.processVideoOutboundStats = function (a) {
-          var b = this._stats.videoSend.find(function (b) {
-            return b.ssrc === a.ssrc;
-          });
-          b || ((b = cb(Rk)), this._stats.videoSend.push(b));
-          var d = this.mediaBytesSent.get(a.ssrc);
-          d
-            ? d.add(a.bytesSent)
-            : ((g = new tg(10)).add(a.bytesSent),
-              this.mediaBytesSent.set(a.ssrc, g));
-          void 0 !== a.retransmittedBytesSent &&
-            ((d = this.mediaBytesRetransmit.get(a.ssrc))
-              ? d.add(a.retransmittedBytesSent)
-              : ((g = new tg(10)).add(a.retransmittedBytesSent),
-                this.mediaBytesRetransmit.set(a.ssrc, g)));
-          if (a.totalEncodedBytesTarget) {
-            var g;
-            (d = this.mediaBytesTargetEncode.get(a.ssrc))
-              ? d.add(a.totalEncodedBytesTarget)
-              : ((g = new tg(10)).add(a.totalEncodedBytesTarget),
-                this.mediaBytesTargetEncode.set(a.ssrc, g));
-          }
-          if (
-            ((b.ssrc = a.ssrc),
-            (b.bytes = a.bytesSent),
-            (b.packets = a.packetsSent),
-            (b.firsCount = a.firCount),
-            (b.nacksCount = a.nackCount),
-            (b.plisCount = a.pliCount),
-            (b.frameCount = a.framesEncoded),
-            (b.adaptionChangeReason = a.qualityLimitationReason),
-            a.totalEncodeTime && a.framesEncoded)
-          )
-            (d = this.lastEncoderMs.get(a.ssrc)),
-              (b.avgEncodeMs =
-                !d || d.lastFrameCount > a.framesEncoded
-                  ? (1e3 * a.totalEncodeTime) / a.framesEncoded
-                  : (1e3 * (a.totalEncodeTime - d.lastEncoderTime)) /
-                    (a.framesEncoded - d.lastFrameCount)),
-              this.lastEncoderMs.set(a.ssrc, {
-                lastFrameCount: a.framesEncoded,
-                lastEncoderTime: a.totalEncodeTime,
-                lts: Date.now()
-              });
-          (a.codecId && (b.codec = this.getCodecFromCodecStats(a.codecId)),
-          a.mediaSourceId && this.processVideoMediaSource(a.mediaSourceId, b),
-          a.trackId && this.processVideoTrackSenderStats(a.trackId, b),
+        (a.codecId && (b.codec = this.getCodecFromCodecStats(a.codecId)),
+        a.mediaSourceId && this.processVideoMediaSource(a.mediaSourceId, b),
+        a.trackId && this.processVideoTrackSenderStats(a.trackId, b),
+        a.remoteId)
+          ? this.processRemoteInboundStats(a.remoteId, b)
+          : (d = this.findRemoteStatsId(a.ssrc, ac.REMOTE_INBOUND)) &&
+            this.processRemoteInboundStats(d, b);
+      }),
+      (b.prototype.processAudioOutboundStats = function (a) {
+        var b = this._stats.audioSend.find(function (b) {
+          return b.ssrc === a.ssrc;
+        });
+        if (
+          (b || ((b = cb(Sk)), this._stats.audioSend.push(b)),
+          (b.ssrc = a.ssrc),
+          (b.packets = a.packetsSent),
+          (b.bytes = a.bytesSent),
+          a.mediaSourceId && this.processAudioMediaSource(a.mediaSourceId, b),
+          a.codecId && (b.codec = this.getCodecFromCodecStats(a.codecId)),
+          a.trackId && this.processAudioTrackSenderStats(a.trackId, b),
           a.remoteId)
-            ? this.processRemoteInboundStats(a.remoteId, b)
-            : (d = this.findRemoteStatsId(a.ssrc, ac.REMOTE_INBOUND)) &&
-              this.processRemoteInboundStats(d, b);
-        }),
-        (b.prototype.processAudioOutboundStats = function (a) {
-          var b = this._stats.audioSend.find(function (b) {
-            return b.ssrc === a.ssrc;
+        )
+          this.processRemoteInboundStats(a.remoteId, b);
+        else {
+          var d = this.findRemoteStatsId(a.ssrc, ac.REMOTE_INBOUND);
+          d && this.processRemoteInboundStats(d, b);
+        }
+      }),
+      (b.prototype.findRemoteStatsId = function (a, b) {
+        var d = Array.from(this.report.values()).find(function (d) {
+          return d.type === b && d.ssrc === a;
+        });
+        return d ? d.id : null;
+      }),
+      (b.prototype.processVideoMediaSource = function (a, b) {
+        (a = this.report.get(a)) &&
+          (b.inputFrame = {
+            width: a.width,
+            height: a.height,
+            frameRate: a.framesPerSecond
           });
-          if (
-            (b || ((b = cb(Sk)), this._stats.audioSend.push(b)),
-            (b.ssrc = a.ssrc),
-            (b.packets = a.packetsSent),
-            (b.bytes = a.bytesSent),
-            a.mediaSourceId && this.processAudioMediaSource(a.mediaSourceId, b),
-            a.codecId && (b.codec = this.getCodecFromCodecStats(a.codecId)),
-            a.trackId && this.processAudioTrackSenderStats(a.trackId, b),
-            a.remoteId)
-          )
-            this.processRemoteInboundStats(a.remoteId, b);
-          else {
-            var d = this.findRemoteStatsId(a.ssrc, ac.REMOTE_INBOUND);
-            d && this.processRemoteInboundStats(d, b);
-          }
-        }),
-        (b.prototype.findRemoteStatsId = function (a, b) {
-          var d = Array.from(this.report.values()).find(function (d) {
-            return d.type === b && d.ssrc === a;
-          });
-          return d ? d.id : null;
-        }),
-        (b.prototype.processVideoMediaSource = function (a, b) {
-          (a = this.report.get(a)) &&
-            (b.inputFrame = {
-              width: a.width,
-              height: a.height,
-              frameRate: a.framesPerSecond
-            });
-        }),
-        (b.prototype.processAudioMediaSource = function (a, b) {
-          (a = this.report.get(a)) && (b.inputLevel = a.audioLevel);
-        }),
-        (b.prototype.processVideoTrackSenderStats = function (a, b) {
-          if ((a = this.report.get(a))) {
-            var d = 0,
-              e = Date.now(),
-              h = this.lastVideoFramesSent.get(b.ssrc);
-            h && 800 <= e - h.lts
-              ? ((d = Math.round(
-                  (a.framesSent - h.count) / ((e - h.lts) / 1e3)
-                )),
-                this.lastVideoFramesSent.set(b.ssrc, {
-                  count: a.framesSent,
-                  lts: e,
-                  rate: d
-                }))
-              : h
-              ? (d = h.rate)
-              : this.lastVideoFramesSent.set(b.ssrc, {
-                  count: a.framesSent,
-                  lts: e,
-                  rate: 0
-                });
-            b.sentFrame = {
-              width: a.frameWidth,
-              height: a.frameHeight,
-              frameRate: d
-            };
-          }
-        }),
-        (b.prototype.processVideoTrackReceiverStats = function (a, b) {
-          if ((a = this.report.get(a))) {
-            var d = this.lastVideoFramesRecv.get(b.ssrc),
-              e = Date.now();
-            b.framesReceivedCount = a.framesReceived;
-            var h = 0;
-            d && 800 <= e - d.lts
-              ? ((h = Math.round(
-                  (a.framesReceived - d.count) / ((e - d.lts) / 1e3)
-                )),
-                this.lastVideoFramesRecv.set(b.ssrc, {
-                  count: a.framesReceived,
-                  lts: e,
-                  rate: h
-                }))
-              : d
-              ? (h = d.rate)
-              : this.lastVideoFramesRecv.set(b.ssrc, {
-                  count: a.framesReceived,
-                  lts: e,
-                  rate: 0
-                });
-            b.receivedFrame = {
-              width: a.frameWidth || 0,
-              height: a.frameHeight || 0,
-              frameRate: h || 0
-            };
-            b.decodedFrame = {
-              width: a.frameWidth || 0,
-              height: a.frameHeight || 0,
-              frameRate: b.decodeFrameRate || 0
-            };
-            b.outputFrame = {
-              width: a.frameWidth || 0,
-              height: a.frameHeight || 0,
-              frameRate: b.decodeFrameRate || 0
-            };
-            a.jitterBufferDelay &&
-              a.jitterBufferEmittedCount &&
-              ((b.jitterBufferMs =
-                (1e3 * a.jitterBufferDelay) / a.jitterBufferEmittedCount),
-              (b.currentDelayMs =
-                (1e3 * a.jitterBufferDelay) / a.jitterBufferEmittedCount));
-          }
-        }),
-        (b.prototype.processAudioTrackSenderStats = function (a, b) {
-          (a = this.report.get(a)) &&
-            ((b.aecReturnLoss = a.echoReturnLoss || 0),
-            (b.aecReturnLossEnhancement = a.echoReturnLossEnhancement || 0));
-        }),
-        (b.prototype.processAudioTrackReceiverStats = function (a, b) {
-          if ((a = this.report.get(a))) {
-            a.removedSamplesForAcceleration &&
-              a.totalSamplesReceived &&
-              (b.accelerateRate =
-                a.removedSamplesForAcceleration / a.totalSamplesReceived);
-            a.jitterBufferDelay &&
-              a.jitterBufferEmittedCount &&
-              (b.jitterBufferMs =
-                (1e3 * a.jitterBufferDelay) / a.jitterBufferEmittedCount);
-            b.outputLevel = a.audioLevel;
-            var d = 1920;
-            a.totalSamplesDuration &&
-              a.totalSamplesReceived &&
-              ((d = a.totalSamplesReceived / a.totalSamplesDuration / 50),
-              (b.receivedFrames = Math.round(a.totalSamplesReceived / d)));
-            a.concealedSamples &&
-              (b.droppedFrames = Math.round(a.concealedSamples / d));
-          }
-        }),
-        (b.prototype.processRemoteInboundStats = function (a, b) {
-          (a = this.report.get(a)) &&
-            ((b.packetsLost = a.packetsLost),
-            a.roundTripTime && (b.rttMs = 1e3 * a.roundTripTime));
-        }),
-        (b.prototype.getCodecFromCodecStats = function (a) {
-          a = this.report.get(a);
-          return a
-            ? (a = a.mimeType.match(/\/(.*)$/)) && a[1]
-              ? a[1]
-              : ""
-            : "";
-        }),
-        (b.prototype.updateSendBitrate = function () {
-          var a = 0,
-            b = null,
-            f = null;
-          this.mediaBytesSent.forEach(function (b) {
-            a += b.diffMean();
-          });
-          this.mediaBytesRetransmit.forEach(function (a) {
-            b = null === b ? a.diffMean() : b + a.diffMean();
-          });
-          this.mediaBytesTargetEncode.forEach(function (a) {
-            f = null === f ? a.diffMean() : f + a.diffMean();
-          });
-          this._stats.bitrate = {
-            actualEncoded:
-              (8 * (null !== b ? a - b : a)) /
-              (this.options.updateInterval / 1e3),
-            transmit: (8 * a) / (this.options.updateInterval / 1e3)
+      }),
+      (b.prototype.processAudioMediaSource = function (a, b) {
+        (a = this.report.get(a)) && (b.inputLevel = a.audioLevel);
+      }),
+      (b.prototype.processVideoTrackSenderStats = function (a, b) {
+        if ((a = this.report.get(a))) {
+          var d = 0,
+            e = Date.now(),
+            h = this.lastVideoFramesSent.get(b.ssrc);
+          h && 800 <= e - h.lts
+            ? ((d = Math.round(
+                (a.framesSent - h.count) / ((e - h.lts) / 1e3)
+              )),
+              this.lastVideoFramesSent.set(b.ssrc, {
+                count: a.framesSent,
+                lts: e,
+                rate: d
+              }))
+            : h
+            ? (d = h.rate)
+            : this.lastVideoFramesSent.set(b.ssrc, {
+                count: a.framesSent,
+                lts: e,
+                rate: 0
+              });
+          b.sentFrame = {
+            width: a.frameWidth,
+            height: a.frameHeight,
+            frameRate: d
           };
-          null !== b &&
-            (this._stats.bitrate.retransmit =
-              (8 * b) / (this.options.updateInterval / 1e3));
-          null !== f &&
-            (this._stats.bitrate.targetEncoded =
-              (8 * f) / (this.options.updateInterval / 1e3));
-        }),
-        b
-      );
+        }
+      }),
+      (b.prototype.processVideoTrackReceiverStats = function (a, b) {
+        if ((a = this.report.get(a))) {
+          var d = this.lastVideoFramesRecv.get(b.ssrc),
+            e = Date.now();
+          b.framesReceivedCount = a.framesReceived;
+          var h = 0;
+          d && 800 <= e - d.lts
+            ? ((h = Math.round(
+                (a.framesReceived - d.count) / ((e - d.lts) / 1e3)
+              )),
+              this.lastVideoFramesRecv.set(b.ssrc, {
+                count: a.framesReceived,
+                lts: e,
+                rate: h
+              }))
+            : d
+            ? (h = d.rate)
+            : this.lastVideoFramesRecv.set(b.ssrc, {
+                count: a.framesReceived,
+                lts: e,
+                rate: 0
+              });
+          b.receivedFrame = {
+            width: a.frameWidth || 0,
+            height: a.frameHeight || 0,
+            frameRate: h || 0
+          };
+          b.decodedFrame = {
+            width: a.frameWidth || 0,
+            height: a.frameHeight || 0,
+            frameRate: b.decodeFrameRate || 0
+          };
+          b.outputFrame = {
+            width: a.frameWidth || 0,
+            height: a.frameHeight || 0,
+            frameRate: b.decodeFrameRate || 0
+          };
+          a.jitterBufferDelay &&
+            a.jitterBufferEmittedCount &&
+            ((b.jitterBufferMs =
+              (1e3 * a.jitterBufferDelay) / a.jitterBufferEmittedCount),
+            (b.currentDelayMs =
+              (1e3 * a.jitterBufferDelay) / a.jitterBufferEmittedCount));
+        }
+      }),
+      (b.prototype.processAudioTrackSenderStats = function (a, b) {
+        (a = this.report.get(a)) &&
+          ((b.aecReturnLoss = a.echoReturnLoss || 0),
+          (b.aecReturnLossEnhancement = a.echoReturnLossEnhancement || 0));
+      }),
+      (b.prototype.processAudioTrackReceiverStats = function (a, b) {
+        if ((a = this.report.get(a))) {
+          a.removedSamplesForAcceleration &&
+            a.totalSamplesReceived &&
+            (b.accelerateRate =
+              a.removedSamplesForAcceleration / a.totalSamplesReceived);
+          a.jitterBufferDelay &&
+            a.jitterBufferEmittedCount &&
+            (b.jitterBufferMs =
+              (1e3 * a.jitterBufferDelay) / a.jitterBufferEmittedCount);
+          b.outputLevel = a.audioLevel;
+          var d = 1920;
+          a.totalSamplesDuration &&
+            a.totalSamplesReceived &&
+            ((d = a.totalSamplesReceived / a.totalSamplesDuration / 50),
+            (b.receivedFrames = Math.round(a.totalSamplesReceived / d)));
+          a.concealedSamples &&
+            (b.droppedFrames = Math.round(a.concealedSamples / d));
+        }
+      }),
+      (b.prototype.processRemoteInboundStats = function (a, b) {
+        (a = this.report.get(a)) &&
+          ((b.packetsLost = a.packetsLost),
+          a.roundTripTime && (b.rttMs = 1e3 * a.roundTripTime));
+      }),
+      (b.prototype.getCodecFromCodecStats = function (a) {
+        a = this.report.get(a);
+        return a
+          ? (a = a.mimeType.match(/\/(.*)$/)) && a[1]
+            ? a[1]
+            : ""
+          : "";
+      }),
+      (b.prototype.updateSendBitrate = function () {
+        var a = 0,
+          b = null,
+          f = null;
+        this.mediaBytesSent.forEach(function (b) {
+          a += b.diffMean();
+        });
+        this.mediaBytesRetransmit.forEach(function (a) {
+          b = null === b ? a.diffMean() : b + a.diffMean();
+        });
+        this.mediaBytesTargetEncode.forEach(function (a) {
+          f = null === f ? a.diffMean() : f + a.diffMean();
+        });
+        this._stats.bitrate = {
+          actualEncoded:
+            (8 * (null !== b ? a - b : a)) /
+            (this.options.updateInterval / 1e3),
+          transmit: (8 * a) / (this.options.updateInterval / 1e3)
+        };
+        null !== b &&
+          (this._stats.bitrate.retransmit =
+            (8 * b) / (this.options.updateInterval / 1e3));
+        null !== f &&
+          (this._stats.bitrate.targetEncoded =
+            (8 * f) / (this.options.updateInterval / 1e3));
+      }),
+      b;
     })(vg),
     zp = (function (a) {
       function b() {
@@ -21218,10 +21206,10 @@
         (a = hf(a, this.audioTrack._encoderConfig));
       l = a;
       m = va();
-      return (l =
+      return l =
         m.name !== da.SAFARI && m.os !== aa.IOS
           ? l
-          : l.replace(/a=.*video-orientation\r\n/g, ""));
+          : l.replace(/a=.*video-orientation\r\n/g, "");
     }
     createPC() {
       this.pc = new Xk({ turnServer: this.joinInfo.turnServer });

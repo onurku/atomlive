@@ -11,7 +11,7 @@ const Youtube = ({ embedId, width, height, poster = "", title, style }) => {
             width,
             height,
             border: "1px solid black",
-            background: `url(${poster}) top center no-repeat; background-size: cover;`,
+            background: `url(${poster}) top center no-repeat; background-size: cover`,
             ...style
           }}
         >

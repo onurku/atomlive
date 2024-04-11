@@ -319,222 +319,218 @@ const VoiceRecognition = ({
     console.log("language", language);
   }, [transcript]);
 
-  return (
-    <>
-      {browserSupportsSpeechRecognition &&
-        language &&
-        (language === "en" ||
-          language?.includes("es") ||
-          language === "fr" ||
-          language === "tr") && (
-          <div className={classes.voiceRoot}>
-            <audio
-              ref={audioRef}
-              src={audioUrl}
-              preload="auto"
-              onEnded={handleAudioEnded}
-              onLoadedMetadata={handleAudioLoaded}
-            />
-            <Stack
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                flexDirection: mode === 2 ? "row-reverse" : "row"
-              }}
-              direction={{ xs: "column", lg: "row" }}
-              spacing={2}
-            >
-              {mode === 0 && (
+  return <>
+    {browserSupportsSpeechRecognition &&
+      language &&
+      (language === "en" ||
+        language?.includes("es") ||
+        language === "fr" ||
+        language === "tr") && (
+        <div className={classes.voiceRoot}>
+          <audio
+            ref={audioRef}
+            src={audioUrl}
+            preload="auto"
+            onEnded={handleAudioEnded}
+            onLoadedMetadata={handleAudioLoaded}
+          />
+          <Stack
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: mode === 2 ? "row-reverse" : "row"
+            }}
+            direction={{ xs: "column", lg: "row" }}
+            spacing={2}
+          >
+            {mode === 0 && (
+              <Button
+                onClick={handleReadYourself}
+                size="small"
+                variant="outlined"
+                color="secondary"
+                sx={{ backgroundColor: Color.hex.navy }}
+              >
+                Read Aloud
+              </Button>
+            )}
+            {mode === 1 && (
+              <Button
+                onClick={handleReadYourself}
+                size="small"
+                variant="outlined"
+                color="secondary"
+              >
+                End Reading
+              </Button>
+            )}
+            {mode === 1 && (
+              <Button onClick={resetTranscript} size="small">
+                Reset
+              </Button>
+            )}
+            {mode === 0 && (
+              <>
                 <Button
-                  onClick={handleReadYourself}
+                  onClick={handleRead}
                   size="small"
                   variant="outlined"
                   color="secondary"
                   sx={{ backgroundColor: Color.hex.navy }}
                 >
-                  Read Aloud
+                  Play Audiobook
                 </Button>
-              )}
-              {mode === 1 && (
-                <Button
-                  onClick={handleReadYourself}
-                  size="small"
-                  variant="outlined"
-                  color="secondary"
-                >
-                  End Reading
-                </Button>
-              )}
-              {mode === 1 && (
-                <Button onClick={resetTranscript} size="small">
-                  Reset
-                </Button>
-              )}
-              {mode === 0 && (
-                <>
+              </>
+            )}
+
+            {mode === 2 && (
+              <>
+                <Stack>
                   <Button
-                    onClick={handleRead}
+                    sx={{ display: "flex", alignSelf: "flex-end", mb: 2 }}
+                    onClick={
+                      language === "en" ||
+                      language?.includes("es") ||
+                      language === "fr" ||
+                      language === "tr"
+                        ? handleRead
+                        : handleReadToMe
+                    }
                     size="small"
                     variant="outlined"
                     color="secondary"
-                    sx={{ backgroundColor: Color.hex.navy }}
                   >
-                    Play Audiobook
+                    Stop Reading
                   </Button>
-                </>
-              )}
+                  <Stack
+                    sx={{ height: contentTextHeight, overflowY: "scroll" }}
+                  >
+                    {pageText?.split("<br/>").map((paragraph, index) => {
+                      return <>
+                        <Typography
+                          variant="body1"
+                          key={index}
+                          gutterBottom
+                        >
+                          {paragraph
+                            .split(" - ")
+                            .join(" ")
+                            .split(" ")
+                            .map((word, ind) => {
+                              const newWord = word
+                                ?.replace(/[:;,.|¿?¡!“”]+/g, "")
+                                ?.toLowerCase();
+                              newWord.split(" – ").join(" ");
+                              // console.log(
+                              //   "check audio",
+                              //   newWord,
+                              //   "vs. ",
+                              //   activeAudioText
+                              // );
+                              const newAudioText = activeAudioText
+                                ?.replace(/[:;,.|¿?¡!“”]+/g, "")
+                                ?.toLowerCase();
+                              currentIndex++;
 
-              {mode === 2 && (
-                <>
-                  <Stack>
-                    <Button
-                      sx={{ display: "flex", alignSelf: "flex-end", mb: 2 }}
-                      onClick={
-                        language === "en" ||
-                        language?.includes("es") ||
-                        language === "fr" ||
-                        language === "tr"
-                          ? handleRead
-                          : handleReadToMe
-                      }
-                      size="small"
-                      variant="outlined"
-                      color="secondary"
-                    >
-                      Stop Reading
-                    </Button>
-                    <Stack
-                      sx={{ height: contentTextHeight, overflowY: "scroll" }}
-                    >
-                      {pageText?.split("<br/>").map((paragraph, index) => {
-                        return (
-                          <>
-                            <Typography
-                              variant="body1"
-                              key={index}
-                              gutterBottom
-                            >
-                              {paragraph
-                                .split(" - ")
-                                .join(" ")
-                                .split(" ")
-                                .map((word, ind) => {
-                                  const newWord = word
-                                    ?.replace(/[:;,.|¿?¡!“”]+/g, "")
-                                    ?.toLowerCase();
-                                  newWord.split(" – ").join(" ");
-                                  // console.log(
-                                  //   "check audio",
-                                  //   newWord,
-                                  //   "vs. ",
-                                  //   activeAudioText
-                                  // );
-                                  const newAudioText = activeAudioText
-                                    ?.replace(/[:;,.|¿?¡!“”]+/g, "")
-                                    ?.toLowerCase();
-                                  currentIndex++;
+                              // if (newAudioText === newWord) {
+                              //   console.log(
+                              //     "audio Text",
+                              //     currentIndex,
+                              //     activeAudioIndex,
+                              //     newWord,
+                              //     newAudioText
+                              //   );
+                              // }
 
-                                  // if (newAudioText === newWord) {
-                                  //   console.log(
-                                  //     "audio Text",
-                                  //     currentIndex,
-                                  //     activeAudioIndex,
-                                  //     newWord,
-                                  //     newAudioText
-                                  //   );
-                                  // }
+                              return (
+                                <Fragment key={ind}>
+                                  {/* {currentIndex === activeAudioIndex && (
+                                <Typography variant="body1">
+                                  {currentIndex}
+                                  {", "} {activeAudioIndex}
+                                </Typography>
+                              )} */}
 
-                                  return (
-                                    <Fragment key={ind}>
-                                      {/* {currentIndex === activeAudioIndex && (
-                                    <Typography variant="body1">
-                                      {currentIndex}
-                                      {", "} {activeAudioIndex}
+                                  {newAudioText === newWord &&
+                                  currentIndex === activeAudioIndex + 1 ? (
+                                    <Typography
+                                      variant="span"
+                                      sx={{
+                                        border: "1px solid black",
+                                        backgroundColor: common.white,
+                                        color: common.brightblue,
+                                        paddingLeft: 1,
+                                        paddingRight: 1
+                                      }}
+                                    >
+                                      {word.toUpperCase()}{" "}
                                     </Typography>
-                                  )} */}
-
-                                      {newAudioText === newWord &&
-                                      currentIndex === activeAudioIndex + 1 ? (
-                                        <Typography
-                                          variant="span"
-                                          sx={{
-                                            border: "1px solid black",
-                                            backgroundColor: common.white,
-                                            color: common.brightblue,
-                                            paddingLeft: 1,
-                                            paddingRight: 1
-                                          }}
-                                        >
-                                          {word.toUpperCase()}{" "}
-                                        </Typography>
-                                      ) : (
-                                        <Typography variant="span">
-                                          {word}{" "}
-                                        </Typography>
-                                      )}
-                                    </Fragment>
-                                  );
-                                })}
-                            </Typography>
-                          </>
-                        );
-                      })}
-                    </Stack>
+                                  ) : (
+                                    <Typography variant="span">
+                                      {word}{" "}
+                                    </Typography>
+                                  )}
+                                </Fragment>
+                              );
+                            })}
+                        </Typography>
+                      </>;
+                    })}
                   </Stack>
-                </>
-              )}
-            </Stack>
-
-            {/* <div
-            id="panel"
-            className={classes.panel}
-            dangerouslySetInnerHTML={{ __html: storyText }}
-          ></div>
-          <div id="panel" className={classes.panel}>
-            {storyText}
-          </div> */}
-
-            {mode === 1 && (
-              <>
-                <Stack
-                  sx={{ display: "flex", alignItems: "center" }}
-                  direction="row"
-                >
-                  <Box sx={{ maxWidth: "70%" }}>
-                    <Typography variant="body2">
-                      Enable mic, start speaking and let's see how well you do.
-                    </Typography>
-
-                    {!isMicrophoneAvailable && (
-                      <Typography variant="body2">
-                        Mic is off. Please check your microphone settings.
-                      </Typography>
-                    )}
-                  </Box>
-                  <div className={classes.start}></div>
                 </Stack>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    mt: 5,
-                    backgroundColor: "white",
-                    scrollY: "auto",
-                    overflowY: "scroll",
-                    px: 2,
-                    height: 150
-                  }}
-                >
-                  <Typography gutterBottom variant="h5">
-                    {interimTranscript}
-                  </Typography>
-                </Box>
               </>
             )}
-          </div>
-        )}
-    </>
-  );
+          </Stack>
+
+          {/* <div
+          id="panel"
+          className={classes.panel}
+          dangerouslySetInnerHTML={{ __html: storyText }}
+        ></div>
+        <div id="panel" className={classes.panel}>
+          {storyText}
+        </div> */}
+
+          {mode === 1 && (
+            <>
+              <Stack
+                sx={{ display: "flex", alignItems: "center" }}
+                direction="row"
+              >
+                <Box sx={{ maxWidth: "70%" }}>
+                  <Typography variant="body2">
+                    Enable mic, start speaking and let's see how well you do.
+                  </Typography>
+
+                  {!isMicrophoneAvailable && (
+                    <Typography variant="body2">
+                      Mic is off. Please check your microphone settings.
+                    </Typography>
+                  )}
+                </Box>
+                <div className={classes.start}></div>
+              </Stack>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  mt: 5,
+                  backgroundColor: "white",
+                  scrollY: "auto",
+                  overflowY: "scroll",
+                  px: 2,
+                  height: 150
+                }}
+              >
+                <Typography gutterBottom variant="h5">
+                  {interimTranscript}
+                </Typography>
+              </Box>
+            </>
+          )}
+        </div>
+      )}
+  </>;
 };
 
 export default VoiceRecognition;

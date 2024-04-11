@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { motion } from "framer-motion";
 import { isMobile } from "mobile-device-detect";
 import useIsDesktop from "@/components/hooks/useIsDesktop";

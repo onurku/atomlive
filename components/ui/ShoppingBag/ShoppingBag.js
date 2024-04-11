@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState
 } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 

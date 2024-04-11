@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import axios, { post } from "axios";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 //Library components
 import PropTypes from "prop-types";

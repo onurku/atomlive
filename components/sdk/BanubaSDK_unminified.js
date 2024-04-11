@@ -1921,12 +1921,10 @@ var g,
           }
           return e.stack.toString();
         })();
-        return (
-          e.extraStackTrace && (t += "\n" + e.extraStackTrace()),
-          t.replace(/\b_Z[\w\d_]+/g, function (e) {
-            return e == e ? e : e + " [" + e + "]";
-          })
-        );
+        return e.extraStackTrace && (t += "\n" + e.extraStackTrace()),
+        t.replace(/\b_Z[\w\d_]+/g, function (e) {
+          return e == e ? e : e + " [" + e + "]";
+        });
       }
       function ke(e, t) {
         ne.unshift({ func: e, arg: t });

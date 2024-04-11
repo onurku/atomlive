@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 import { Button } from "../components/Button";

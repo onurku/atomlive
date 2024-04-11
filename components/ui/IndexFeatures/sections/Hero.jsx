@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Youtube from "../../Youtube";
 import { Button } from "../components/Button"; // Assuming this is the custom Button component you have
 import Text from "../components/Text"; // Assuming this is the custom Text component you have
