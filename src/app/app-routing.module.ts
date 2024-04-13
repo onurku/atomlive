@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
-  { path: '', component: AppComponent,  title: 'Anasayfa' },
+  { path: '', component: AppComponent,  title: 'Atom Books AI' },
 ];
 
 
